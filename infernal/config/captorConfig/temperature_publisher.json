@@ -1,0 +1,6 @@
+{
+  "brokerHost": "localhost",
+  "brokerPort": "1883",
+  "qos": 0,
+  "clientId": 1
+}
