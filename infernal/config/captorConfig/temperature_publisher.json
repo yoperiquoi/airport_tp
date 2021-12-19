@@ -1,6 +1,10 @@
 {
   "brokerHost": "localhost",
-  "brokerPort": "1883",
+  "brokerPort": 1883,
   "qos": 0,
-  "clientId": 1
+  "clientId": "temperature-client-1",
+  "publishDelai": 10,
+  "captorId": 202101121,
+  "IataCode": "NTE",
+  "measureType": "temperature"
 }

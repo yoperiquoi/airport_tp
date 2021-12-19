@@ -1,0 +1,10 @@
+{
+  "brokerHost": "localhost",
+  "brokerPort": 1883,
+  "qos": 0,
+  "clientId": "pressure-client-1",
+  "publishDelai": 10,
+  "captorId": 202101123,
+  "IataCode": "NTE",
+  "measureType": "pressure"
+}
