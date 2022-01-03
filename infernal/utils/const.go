@@ -1,4 +1,4 @@
-package captorUtils
+package utils
 
 const TopicTemp = "temp"
 const TopicPressure = "pressure"
