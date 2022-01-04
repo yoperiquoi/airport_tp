@@ -1,9 +1,9 @@
 package main
 
 import (
-	pubconfig "airport_tp/infernal/config/captorConfig"
-	"airport_tp/infernal/utils"
-	pubutils "airport_tp/infernal/utils/captorUtils"
+	pubconfig "airport_tp/internal/config/captorConfig"
+	"airport_tp/internal/utils"
+	pubutils "airport_tp/internal/utils/captorUtils"
 	"log"
 	"math/rand"
 	"strconv"
