@@ -15,7 +15,7 @@ type Config struct {
 
 func LoadConfig(subscriberType string) Config {
 	var config Config
-	configFile, err := os.Open("infernal/config/subscribersConfig/" + subscriberType + "_subscriber.json")
+	configFile, err := os.Open(subscriberType + "_subscriber.json")
 	if err != nil {
 		log.Println(err.Error())
 		return Config{}
