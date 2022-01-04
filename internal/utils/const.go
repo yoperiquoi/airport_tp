@@ -16,4 +16,3 @@ const WindMaxVariation = 3.0
 const PressureMin = 960.0
 const PressureMax = 1050.0
 const PressureMaxVariation = 5.0
-

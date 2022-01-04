@@ -55,16 +55,15 @@ func insertIntoCsv(csvFile *os.File, message parsedMessage) {
 var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
 	log.Printf("Received message: %s from topic: %s\n", msg.Payload(), msg.Topic())
 	parsedString := strings.Split(string(msg.Payload()), "|")
-
-	a, _ := time.Parse("2006-01-02-15-04-05", parsedString[4])
+	unixDate, _ := strconv.ParseInt(parsedString[4], 10, 64)
+	date := time.Unix(unixDate, 0)
 	parsedMessage := parsedMessage{
 		captorId:    parsedString[0],
 		airportId:   parsedString[1],
 		measureType: parsedString[2],
 		value:       parsedString[3],
-		date:        a,
+		date:        date,
 	}
-
 	filename := parsedMessage.airportId + "-" + parsedMessage.date.Format("2006-01-02") + "-" + msg.Topic() + ".csv"
 	exists, _ := fileExists(filename)
 	var csvFile *os.File
