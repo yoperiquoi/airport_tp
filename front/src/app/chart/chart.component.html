@@ -1,0 +1,11 @@
+<div>
+  {{ labels | json }}
+  {{ values | json }}
+  <canvas width="400" height="500"
+    baseChart
+    [datasets]="datasets"
+    [labels]="labels"
+    [type]="'line'"
+  ></canvas>
+</div>
+
