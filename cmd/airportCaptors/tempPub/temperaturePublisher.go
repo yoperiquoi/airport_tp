@@ -14,7 +14,7 @@ func generateRandomTemperature(lastTemperature float64) float64 {
 	maxVariation := utils.TempMaxVariation
 	if rand.Intn(2) == 0 {
 		lastTemperature = lastTemperature + maxVariation
-	}else{
+	} else {
 		lastTemperature = lastTemperature - maxVariation
 	}
 	return lastTemperature
@@ -28,7 +28,7 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-	lastTemperature := utils.TempMax - ((utils.TempMax - utils.PressureMin)/2)
+	lastTemperature := utils.TempMax - ((utils.TempMax - utils.TempMin) / 2)
 	for {
 		lastTemperature = generateRandomTemperature(lastTemperature)
 		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastTemperature, time.Now())
