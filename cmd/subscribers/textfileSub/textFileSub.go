@@ -1,9 +1,9 @@
 package main
 
 import (
-	subconfig "airport_tp/infernal/config/subscribersConfig"
-	"airport_tp/infernal/utils"
-	subutils "airport_tp/infernal/utils/subscribersUtils"
+	subconfig "airport_tp/internal/config/subscribersConfig"
+	"airport_tp/internal/utils"
+	subutils "airport_tp/internal/utils/subscribersUtils"
 	"encoding/csv"
 	"errors"
 	"fmt"
