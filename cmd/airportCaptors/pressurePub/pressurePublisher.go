@@ -10,10 +10,14 @@ import (
 	"time"
 )
 
-func generateRandomPressure() float64 {
-	min := utils.PressureMin
-	max := utils.PressureMax
-	return (rand.Float64() * (max - min)) + min
+func generateRandomPressure(lastPressure float64) float64 {
+	maxVariation := utils.PressureMaxVariation
+	if rand.Intn(2) == 0 {
+		lastPressure = lastPressure + maxVariation
+	}else{
+		lastPressure = lastPressure - maxVariation
+	}
+	return lastPressure
 }
 
 func main() {
@@ -24,9 +28,10 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-
+	lastPressure := utils.PressureMax - ((utils.PressureMax - utils.PressureMin)/2)
 	for {
-		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, generateRandomPressure(), time.Now())
+		lastPressure = generateRandomPressure(lastPressure)
+		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastPressure, time.Now())
 		publisher.Publish(utils.TopicPressure, byte(config.Qos), false, message)
 		log.Println(config.ClientId + " publish : " + message)
 		time.Sleep(time.Second * time.Duration(config.PublishDelai))
