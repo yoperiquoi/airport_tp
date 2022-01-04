@@ -26,5 +26,5 @@ func Connect(brokerURI string, clientId string) mqtt.Client {
 }
 
 func FormatMessage(captorId int, airportID string, measureType string, value float64, date time.Time) string {
-	return strconv.Itoa(captorId) + "|" + airportID + "|" + measureType + "|" + fmt.Sprintf("%f", value) + "|" + date.Format("2006-01-02-15-04-05")
+	return strconv.Itoa(captorId) + "|" + airportID + "|" + measureType + "|" + fmt.Sprintf("%.2f", value) + "|" + strconv.Itoa(int(date.Unix()))
 }
