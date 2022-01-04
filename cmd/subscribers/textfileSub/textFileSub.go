@@ -57,7 +57,6 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 	parsedString := strings.Split(string(msg.Payload()), "|")
 
 	a, _ := time.Parse("2006-01-02-15-04-05", parsedString[4])
-
 	parsedMessage := parsedMessage{
 		captorId:    parsedString[0],
 		airportId:   parsedString[1],

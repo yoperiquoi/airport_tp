@@ -19,10 +19,10 @@ type Config struct {
 
 func LoadConfig(publisherType string) Config {
 	var config Config
-	configFile, err := os.Open("infernal/config/captorConfig/" + publisherType + "_publisher.json")
+	configFile, err := os.Open(publisherType + "_publisher.json")
 	if err != nil {
 		log.Println(err.Error())
-		return Config{}
+		panic(err)
 	}
 	defer func(configFile *os.File) {
 		err := configFile.Close()
