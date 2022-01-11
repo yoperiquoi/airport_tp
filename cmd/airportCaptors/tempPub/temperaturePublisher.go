@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-func generateRandomTemperature(lastTemperature float64) float64 {
-	maxVariation := utils.TempMaxVariation
+func generateRandomTemperature(lastTemperature float64, config pubconfig.Config) float64 {
+	maxVariation := config.Variation
 	if rand.Intn(2) == 0 {
 		lastTemperature = lastTemperature + maxVariation
 	} else {
@@ -28,9 +28,9 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-	lastTemperature := utils.TempMax - ((utils.TempMax - utils.TempMin) / 2)
+	lastTemperature := config.Max - ((config.Max - config.Min) / 2)
 	for {
-		lastTemperature = generateRandomTemperature(lastTemperature)
+		lastTemperature = generateRandomTemperature(lastTemperature, config)
 		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastTemperature, time.Now())
 		publisher.Publish(utils.TopicTemp, byte(config.Qos), false, message)
 		log.Println(config.ClientId + " publish : " + message)

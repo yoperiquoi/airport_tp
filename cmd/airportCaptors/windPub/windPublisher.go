@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-func generateRandomWind(lastWind float64) float64 {
-	maxVariation := utils.WindMaxVariation
+func generateRandomWind(lastWind float64, config pubconfig.Config) float64 {
+	maxVariation := config.Variation
 	if rand.Intn(2) == 0 {
 		lastWind = lastWind + maxVariation
-	}else{
+	} else {
 		lastWind = lastWind - maxVariation
 	}
 	return lastWind
@@ -28,9 +28,9 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-	lastWind := utils.WindMax - ((utils.WindMax - utils.WindMin)/2)
+	lastWind := config.Max - ((config.Max - config.Min) / 2)
 	for {
-		lastWind = generateRandomWind(lastWind)
+		lastWind = generateRandomWind(lastWind, config)
 		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastWind, time.Now())
 		publisher.Publish(utils.TopicWind, byte(config.Qos), false, message)
 		log.Println(config.ClientId + " publish : " + message)

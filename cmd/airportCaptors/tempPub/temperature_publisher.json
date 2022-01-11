@@ -6,5 +6,8 @@
   "publishDelai": 10,
   "captorId": 202101121,
   "IataCode": "NTE",
-  "measureType": "temperature"
+  "measureType": "temperature",
+  "max": 45.0,
+  "min": -10.0,
+  "variation": 1.0
 }

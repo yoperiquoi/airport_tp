@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-func generateRandomPressure(lastPressure float64) float64 {
-	maxVariation := utils.PressureMaxVariation
+func generateRandomPressure(lastPressure float64, config pubconfig.Config) float64 {
+	maxVariation := config.Variation
 	if rand.Intn(2) == 0 {
 		lastPressure = lastPressure + maxVariation
-	}else{
+	} else {
 		lastPressure = lastPressure - maxVariation
 	}
 	return lastPressure
@@ -28,9 +28,9 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-	lastPressure := utils.PressureMax - ((utils.PressureMax - utils.PressureMin)/2)
+	lastPressure := config.Max - ((config.Max - config.Min) / 2)
 	for {
-		lastPressure = generateRandomPressure(lastPressure)
+		lastPressure = generateRandomPressure(lastPressure, config)
 		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastPressure, time.Now())
 		publisher.Publish(utils.TopicPressure, byte(config.Qos), false, message)
 		log.Println(config.ClientId + " publish : " + message)

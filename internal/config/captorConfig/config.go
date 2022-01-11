@@ -7,14 +7,17 @@ import (
 )
 
 type Config struct {
-	BrokerHost   string `json:"brokerHost"`
-	BrokerPort   int    `json:"BrokerPort"`
-	Qos          int    `json:"qos"`
-	ClientId     string `json:"clientId"`
-	PublishDelai int    `json:"publishDelai"`
-	CaptorId     int    `json:"captorId"`
-	IataCode     string `json:"IataCode"`
-	MeasureType  string `json:"MeasureType"`
+	BrokerHost   string  `json:"brokerHost"`
+	BrokerPort   int     `json:"brokerPort"`
+	Qos          int     `json:"qos"`
+	ClientId     string  `json:"clientId"`
+	PublishDelai int     `json:"publishDelai"`
+	CaptorId     int     `json:"captorId"`
+	IataCode     string  `json:"IataCode"`
+	MeasureType  string  `json:"measureType"`
+	Max          float64 `json:"max"`
+	Min          float64 `json:"min"`
+	Variation    float64 `json:"variation"`
 }
 
 func LoadConfig(publisherType string) Config {
