@@ -39,10 +39,7 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 	sensorTs := "sensor:" + parsedMessage.captorId + ":" + parsedMessage.airportId
 
 	log.Println(sensorTs)
-
-	log.Println("TS.ADD", sensorTs + " " + strconv.Itoa(int(parsedMessage.date.Unix())) + " " + parsedMessage.value)
-
-
+	
 	value, _ := strconv.ParseFloat(parsedMessage.value, 64)
 	_, err := dbConnect.Add(sensorTs, parsedMessage.date.Unix(), value)
 	if err != nil {
@@ -58,6 +55,7 @@ func main() {
 	tokenSubscriberTemp := subscriber.Subscribe(utils.TopicTemp, byte(config.Qos), messageHandler)
 	tokenSubscriberPressure := subscriber.Subscribe(utils.TopicPressure, byte(config.Qos), messageHandler)
 	tokenSubscriberWind := subscriber.Subscribe(utils.TopicWind, byte(config.Qos), messageHandler)
+
 
 	for {
 		tokenSubscriberTemp.Wait()
