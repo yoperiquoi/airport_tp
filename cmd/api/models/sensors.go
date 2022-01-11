@@ -28,7 +28,7 @@ func GetAverageForADay(airport_id string) string{
 	rangeOptions := redistimeseries.DefaultMultiRangeOptions
 	rangeOptions.SetWithLabels(true)
 	rangeOptions.SetAggregation(redistimeseries.AvgAggregation, 86400)
-	result, _ := database.CreateConnexion().MultiRangeWithOptions(passedDate, actualDate, rangeOptions, "airport_id=" + airport_id)
+	result, _ := database.CreateConnexion().MultiRangeWithOptions(passedDate, actualDate, rangeOptions, "airport_id="+ airport_id)
 	resultJson, _ := json.Marshal(result)
 	return string(resultJson)
 }
@@ -37,8 +37,8 @@ func GetAverageForADay(airport_id string) string{
 func GetMesureFromTypeInRange(airport_id string,measureType string, start int64, end int64) string {
 	rangeOptions := redistimeseries.DefaultMultiRangeOptions
 	rangeOptions.WithLabels = true
-	result, _ := database.CreateConnexion().MultiRangeWithOptions(start, end, rangeOptions, "airport_id=" + airport_id, "sensor_id=202101122")
+	result, _ := database.CreateConnexion().MultiRangeWithOptions(start, end, rangeOptions, "airport_id=" + airport_id, "sensor_type=" + measureType)
 	resultJson, _ := json.Marshal(result)
-
+	print(string(resultJson))
 	return string(resultJson)
 }
