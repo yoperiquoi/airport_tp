@@ -42,10 +42,9 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 
 	log.Println("TS.ADD", sensorTs + " " + strconv.Itoa(int(parsedMessage.date.Unix())) + " " + parsedMessage.value)
 
-	_, err := dbConnect.Do("TS.ADD",
-		sensorTs,
-		strconv.Itoa(int(parsedMessage.date.Unix())),
-		parsedMessage.value)
+
+	value, _ := strconv.ParseFloat(parsedMessage.value, 64)
+	_, err := dbConnect.Add(sensorTs, parsedMessage.date.Unix(), value)
 	if err != nil {
 		log.Println(err)
 	}

@@ -3,6 +3,7 @@ module airport_tp
 go 1.17
 
 require (
+	github.com/RedisTimeSeries/redistimeseries-go v1.4.4
 	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/go-redis/redis/v8 v8.11.4
 	github.com/gomodule/redigo v1.8.8
