@@ -1,19 +1,23 @@
 package main
 
 import (
-	pubconfig "airport_tp/infernal/config/captorConfig"
-	"airport_tp/infernal/utils"
-	pubutils "airport_tp/infernal/utils/captorUtils"
+	pubconfig "airport_tp/internal/config/captorConfig"
+	"airport_tp/internal/utils"
+	pubutils "airport_tp/internal/utils/captorUtils"
 	"log"
 	"math/rand"
 	"strconv"
 	"time"
 )
 
-func generateRandomWind() float64 {
-	min := utils.WindMin
-	max := utils.WindMax
-	return (rand.Float64() * (max - min)) + min
+func generateRandomWind(lastWind float64, config pubconfig.Config) float64 {
+	maxVariation := config.Variation
+	if rand.Intn(2) == 0 {
+		lastWind = lastWind + maxVariation
+	} else {
+		lastWind = lastWind - maxVariation
+	}
+	return lastWind
 }
 
 func main() {
@@ -24,9 +28,10 @@ func main() {
 		publisher.Disconnect(250)
 		log.Println(config.ClientId + " disconnect from the broker")
 	}()
-
+	lastWind := config.Max - ((config.Max - config.Min) / 2)
 	for {
-		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, generateRandomWind(), time.Now())
+		lastWind = generateRandomWind(lastWind, config)
+		message := pubutils.FormatMessage(config.CaptorId, config.IataCode, config.MeasureType, lastWind, time.Now())
 		publisher.Publish(utils.TopicWind, byte(config.Qos), false, message)
 		log.Println(config.ClientId + " publish : " + message)
 		time.Sleep(time.Second * time.Duration(config.PublishDelai))

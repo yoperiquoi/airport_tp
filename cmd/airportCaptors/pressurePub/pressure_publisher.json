@@ -6,5 +6,8 @@
   "publishDelai": 10,
   "captorId": 202101123,
   "IataCode": "NTE",
-  "measureType": "pressure"
+  "measureType": "pressure",
+  "max": 960.0,
+  "min": 1050.0,
+  "variation": 5.0
 }

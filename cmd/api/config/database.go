@@ -1,4 +1,4 @@
-package database
+package config
 
 import (
 	"fmt"
@@ -24,3 +24,6 @@ func CloseConnection(conn redis.Conn) {
 		fmt.Println("disconnected")
 	}(conn)
 }
+
+
+
