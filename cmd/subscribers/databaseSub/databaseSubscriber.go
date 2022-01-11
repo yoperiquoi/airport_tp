@@ -5,6 +5,7 @@ import (
 	"airport_tp/internal/database"
 	"airport_tp/internal/utils"
 	subutils "airport_tp/internal/utils/subscribersUtils"
+	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"log"
 	"strconv"
@@ -36,11 +37,10 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 
 	dbConnect := database.CreateConnexion()
 
-	sensorTs := "sensor:" + parsedMessage.captorId + ":" + parsedMessage.airportId
-
-	log.Println(sensorTs)
-	
+	sensorTs := "sensor:" + parsedMessage.measureType + ":" + parsedMessage.airportId
+	fmt.Println(sensorTs)
 	value, _ := strconv.ParseFloat(parsedMessage.value, 64)
+
 	_, err := dbConnect.Add(sensorTs, parsedMessage.date.Unix(), value)
 	if err != nil {
 		log.Println(err)
