@@ -1,0 +1,49 @@
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter an Airport Code</mat-label>
+        <input matInput formControlName="airportCode">
+      </mat-form-field>
+    </div>
+
+    <div class="toggle-btn">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="type">
+        <mat-button-toggle value="average">Average</mat-button-toggle>
+        <mat-button-toggle value="range">Range</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div *ngIf="type === 'average'">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="type === 'range'">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+          <input matStartDate placeholder="Start date" formControlName="startDate">
+          <input matEndDate placeholder="End date" formControlName="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker></mat-date-range-picker>
+      </mat-form-field>
+
+      <div class="type-btn">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="nature">
+          <mat-button-toggle value="temperature">Temperature</mat-button-toggle>
+          <mat-button-toggle value="wind">Wind</mat-button-toggle>
+          <mat-button-toggle value="pressure">Pressure</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">Valider</button>
+  </form>
+  <app-chart *ngIf="type === 'range' && captorRangeData" [dataset]="captorRangeData" [startDate]="startDate" [endDate]="endDate"></app-chart>
+</div>
