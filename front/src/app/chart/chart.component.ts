@@ -45,7 +45,8 @@ export class ChartComponent implements OnInit {
   get datasets(): ChartDataset[] {
     return [{
       data: this.values,
-      label: 'Temperatures'
+      label: 'Temperatures',
+      
     }]
   }
 }
