@@ -10,6 +10,8 @@ import (
 
 func SensorsIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json;charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode("Le serveur est bien démarré !")
 }
@@ -17,6 +19,8 @@ func SensorsIndex(w http.ResponseWriter, r *http.Request) {
 
 func AverageForDay(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json;charset=UTF-8")
+    w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	vars := mux.Vars(r)
 
@@ -26,6 +30,8 @@ func AverageForDay(w http.ResponseWriter, r *http.Request) {
 
 func GetMesureFromTypeInRange(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-type", "application/json;charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	vars := mux.Vars(r)
 
