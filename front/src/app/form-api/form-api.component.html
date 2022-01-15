@@ -45,5 +45,6 @@
 
     <button type="submit" class="btn-submit">Valider</button>
   </form>
-  <app-chart *ngIf="type === 'range' && captorRangeData" [dataset]="captorRangeData" [startDate]="startDate" [endDate]="endDate"></app-chart>
+  <app-chart *ngIf="type === 'range' && captorRangeData.length > 0" [dataset]="captorRangeData"></app-chart>
 </div>
+

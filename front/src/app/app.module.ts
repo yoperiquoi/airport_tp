@@ -12,6 +12,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ChartComponent } from './chart/chart.component';
 import {NgChartsModule} from "ng2-charts";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {NgChartsModule} from "ng2-charts";
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    NgChartsModule
+    NgChartsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
