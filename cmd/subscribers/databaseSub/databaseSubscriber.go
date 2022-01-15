@@ -56,13 +56,9 @@ func main() {
 	tokenSubscriberPressure := subscriber.Subscribe(utils.TopicPressure, byte(config.Qos), messageHandler)
 	tokenSubscriberWind := subscriber.Subscribe(utils.TopicWind, byte(config.Qos), messageHandler)
 
-
 	for {
 		tokenSubscriberTemp.Wait()
 		tokenSubscriberPressure.Wait()
 		tokenSubscriberWind.Wait()
 	}
-
-
-
 }

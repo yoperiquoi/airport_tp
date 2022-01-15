@@ -16,6 +16,9 @@ import (
 	_ "time"
 )
 
+/*
+	Function which inform if the file already exists
+*/
 func fileExists(name string) (bool, error) {
 	_, err := os.Stat(name)
 	if err == nil {
@@ -27,6 +30,9 @@ func fileExists(name string) (bool, error) {
 	return false, err
 }
 
+/*
+	Struct used to store parsed information of the message
+*/
 type parsedMessage struct {
 	captorId    string
 	airportId   string
@@ -35,7 +41,11 @@ type parsedMessage struct {
 	date        time.Time
 }
 
+/*
+	Function which inserts into the specified file the parsed message received
+*/
 func insertIntoCsv(csvFile *os.File, message parsedMessage) {
+	// Create the writer on the file
 	csvWriter := csv.NewWriter(csvFile)
 	line := []string{
 		message.captorId,
@@ -83,13 +93,20 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 func main() {
 	config := subconfig.LoadConfig("textfile")
 	log.Println("Load configuration of the subscriber")
+	// Connect to the broker
 	subscriber := subutils.Connect("tcp://"+config.BrokerHost+":"+strconv.Itoa(config.BrokerPort), config.ClientId)
-
+	// Disconnect of the broker at the end of the program
+	defer func() {
+		subscriber.Disconnect(250)
+		log.Println(config.ClientId + " disconnect from the broker")
+	}()
+	// Subscribe to the 3 topics
 	tokenSubscriberTemp := subscriber.Subscribe(utils.TopicTemp, byte(config.Qos), messageHandler)
 	tokenSubscriberPressure := subscriber.Subscribe(utils.TopicPressure, byte(config.Qos), messageHandler)
 	tokenSubscriberWind := subscriber.Subscribe(utils.TopicWind, byte(config.Qos), messageHandler)
 
 	for {
+		// Waiting on each topic it subscribed
 		tokenSubscriberTemp.Wait()
 		tokenSubscriberPressure.Wait()
 		tokenSubscriberWind.Wait()

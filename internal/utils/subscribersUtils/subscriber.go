@@ -5,6 +5,9 @@ import (
 	"log"
 )
 
+/*
+	Function which returns the options for the MQTT connection to the broker
+*/
 func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions {
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(brokerURI)
@@ -12,6 +15,9 @@ func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions 
 	return opts
 }
 
+/*
+	Function which returns the connection to the MQTT Broker
+*/
 func Connect(brokerURI string, clientId string) mqtt.Client {
 	log.Println("Trying to connect to broker : " + brokerURI + ", with subscriber : " + clientId + "")
 	opts := createClientOptions(brokerURI, clientId)
