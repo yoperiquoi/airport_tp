@@ -5,7 +5,6 @@ import {CaptorRangeData} from "../models/CaptorRangeData";
 import {CaptorAverageData} from "../models/CaptorAverageData";
 import {Observable} from "rxjs";
 
-
 @Component({
   selector: 'app-form-api',
   templateUrl: './form-api.component.html',

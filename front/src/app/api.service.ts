@@ -50,5 +50,6 @@ export class ApiService {
         const data = JSON.parse(response)[0];
         console.log(data);
       })
+
   }
 }

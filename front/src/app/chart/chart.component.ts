@@ -31,6 +31,7 @@ export class ChartComponent {
    * @return {number[]} The values
    */
   get values(): number[] {
+
     const numbers = [];
     for (const datasetElement of this.dataset) {
       numbers.push(datasetElement.value);
