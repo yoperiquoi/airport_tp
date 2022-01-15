@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {ApiService} from "../api.service";
 import {CaptorRangeData} from "../models/CaptorRangeData";
 import {CaptorAverageData} from "../models/CaptorAverageData";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -11,10 +12,9 @@ import {CaptorAverageData} from "../models/CaptorAverageData";
   styleUrls: ['./form-api.component.scss']
 })
 export class FormApiComponent implements OnInit {
-
   myForm: FormGroup;
   captorAverageData: CaptorAverageData | null;
-  captorRangeData: CaptorRangeData[] | null;
+  captorRangeData: CaptorRangeData[];
 
   constructor(
     private fb: FormBuilder,
@@ -30,23 +30,27 @@ export class FormApiComponent implements OnInit {
       endDate: new Date(),
       nature: 'temperature'
     });
+    this.apiService.rangeData.subscribe((value => this.captorRangeData = value));
   }
 
-  onSubmit(): void {
+  /**
+   * Send the form data to the API using apiService
+   */
+  async onSubmit(): Promise<void> {
     if (this.myForm.valid) {
       if (this.type === 'range') {
         this.captorAverageData = null;
-        this.captorRangeData = this.apiService.getRangeData(
+        this.apiService.getRangeData(
           this.airportCode,
           this.nature,
-          this.startDate,
-          this.endDate
+          Math.round(this.startDate.getTime()/1000),
+          Math.round(this.endDate.getTime()/1000)
         );
       } else {
         this.captorAverageData = null;
-        this.captorAverageData = this.apiService.getAverageData(
+        this.apiService.getAverageData(
           this.airportCode,
-          this.date
+          Math.round(this.date.getTime()/1000)
         );
       }
     }
@@ -64,15 +68,15 @@ export class FormApiComponent implements OnInit {
     return this.myForm.get('airportCode')?.value;
   }
 
-  get date() {
+  get date(): Date {
     return this.myForm.get('date')?.value;
   }
 
-  get startDate() {
+  get startDate(): Date {
     return this.myForm.get('startDate')?.value;
   }
 
-  get endDate() {
+  get endDate(): Date {
     return this.myForm.get('endDate')?.value;
   }
 }
