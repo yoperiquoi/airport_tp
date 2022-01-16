@@ -1,4 +1,4 @@
-# airport_tp
+# airport TP
 
 ## To setup redis database
 
@@ -14,9 +14,29 @@ TS.CREATE sensor:wind:NTE LABELS airport_id NTE sensor_type wind unit KMH
 TS.CREATE sensor:pressure:NTE LABELS airport_id NTE sensor_type pressure unit percent
 ```
 
-3) To launch api :
+## To launch services
+
+1) Using go run / build method : 
+```shell
+go run xxx.go
+```
+or
 ```shell
 go build
-./api
 ```
-4) 
+In the directory of each services because the program will search for config file in the location where it's launched
+
+2) Using the go install method :
+```shell
+go install ./...
+```
+on the root of the project, will build all the binaries and resolve dependencies. All the binaries files are located in 
+the GOROOT/bin folder 
+
+To launch the binary take care to have the config file in the same location (for captors and subscribers), if not the program will stop.
+
+## To launch the front end application
+
+```shell
+npm start
+```
