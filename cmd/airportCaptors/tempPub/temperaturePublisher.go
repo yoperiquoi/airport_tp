@@ -16,7 +16,7 @@ import (
 func generateRandomTemperature(lastTemperature float64, config pubconfig.Config) float64 {
 	// Based on the previous value it generate a value according to the variation
 	maxVariation := config.Variation
-	if rand.Intn(2) == 0 {
+	if rand.Intn(4) == 0 {
 		lastTemperature = lastTemperature + maxVariation
 	} else {
 		lastTemperature = lastTemperature - maxVariation
