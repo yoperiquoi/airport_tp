@@ -1,7 +1,7 @@
 {
   "brokerHost": "localhost",
   "brokerPort": 1883,
-  "qos": 0,
+  "qos": 1,
   "clientId": "wind-client-1",
   "publishDelai": 10,
   "captorId": 202101122,
