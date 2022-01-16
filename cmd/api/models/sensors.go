@@ -21,8 +21,8 @@ type Mesure struct {
 
 type Mesures []Mesure
 
-func GetAverageForADay(airport_id string) string{
-	actualDate := time.Now().Unix()
+func GetAverageForADay(airport_id string, date int64) string{
+	actualDate := date
 	passedDate := actualDate - 86400
 
 	rangeOptions := redistimeseries.DefaultMultiRangeOptions

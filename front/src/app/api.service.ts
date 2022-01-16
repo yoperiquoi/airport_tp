@@ -44,7 +44,7 @@ export class ApiService {
   }
 
   getAverageData (airportCode: string, date: number) {
-    this.http.get<string>(this.URL_API + 'AverageForDay/'+airportCode,
+    this.http.get<string>(this.URL_API + 'AverageForDay/'+airportCode+'/'+date,
       this.OPTIONS)
       .subscribe((response) => {
         const data = JSON.parse(response);

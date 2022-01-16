@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {ApiService} from "../api.service";
 import {CaptorRangeData} from "../models/CaptorRangeData";
 import {CaptorAverageData} from "../models/CaptorAverageData";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-form-api',
@@ -49,9 +50,12 @@ export class FormApiComponent implements OnInit {
         );
       } else {
         this.captorAverageData = null;
+        let date = moment(this.date.setHours(0, 0, 0));
+        date = date.add(1, 'days');
+        console.log(Math.round(date.utc().valueOf() / 1000));
         this.apiService.getAverageData(
           this.airportCode,
-          Math.round(this.date.getTime()/1000)
+          Math.round(date.utc().valueOf() / 1000)
         );
       }
     }

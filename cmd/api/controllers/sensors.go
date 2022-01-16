@@ -23,8 +23,8 @@ func AverageForDay(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	vars := mux.Vars(r)
-
-	average := models.GetAverageForADay(vars["airport_id"])
+	date,_ := strconv.ParseInt(vars["date"],10,64)
+	average := models.GetAverageForADay(vars["airport_id"], date)
 	json.NewEncoder(w).Encode(average)
 }
 
