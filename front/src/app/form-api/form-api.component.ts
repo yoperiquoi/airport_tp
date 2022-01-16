@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {ApiService} from "../api.service";
 import {CaptorRangeData} from "../models/CaptorRangeData";
 import {CaptorAverageData} from "../models/CaptorAverageData";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-form-api',
@@ -30,6 +29,9 @@ export class FormApiComponent implements OnInit {
       nature: 'temperature'
     });
     this.apiService.rangeData.subscribe((value => this.captorRangeData = value));
+    this.apiService.averageData.subscribe((value) => {
+      if (value) this.captorAverageData = value;
+    })
   }
 
   /**

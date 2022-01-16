@@ -18,8 +18,8 @@ export class ApiService {
   };
   private _rangeData: BehaviorSubject<CaptorRangeData[]> = new BehaviorSubject<CaptorRangeData[]>([]);
   public readonly rangeData: Observable<CaptorRangeData[]> = this._rangeData.asObservable();
-  private _averageData: BehaviorSubject<CaptorRangeData[]> = new BehaviorSubject<CaptorRangeData[]>([]);
-  public readonly averageData: Observable<CaptorRangeData[]> = this._rangeData.asObservable();
+  private _averageData: BehaviorSubject<CaptorAverageData | null> = new BehaviorSubject<CaptorAverageData | null>(null);
+  public readonly averageData: Observable<CaptorAverageData | null> = this._averageData.asObservable();
 
   constructor(private http: HttpClient) {
 
@@ -47,9 +47,12 @@ export class ApiService {
     this.http.get<string>(this.URL_API + 'AverageForDay/'+airportCode,
       this.OPTIONS)
       .subscribe((response) => {
-        const data = JSON.parse(response)[0];
-        console.log(data);
+        const data = JSON.parse(response);
+        this._averageData.next({
+          pressureAverage: data[0].DataPoints[0].Value,
+          temperatureAverage: data[1].DataPoints[0].Value,
+          windAverage: data[2].DataPoints[0].Value
+        });
       })
-
   }
 }

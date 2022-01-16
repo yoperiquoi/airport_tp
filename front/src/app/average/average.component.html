@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-card>
+    <mat-grid-list cols="3" rowHeight="4:1">
+      <mat-grid-tile>
+        <mat-grid-tile-header id="temp">
+          Temperature
+        </mat-grid-tile-header>
+        <span>
+          {{averageData.temperatureAverage | number: '1.0-2'}} C°
+        </span>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-grid-tile-header id="press">
+          Pressure
+        </mat-grid-tile-header>
+        <span>
+          {{averageData.pressureAverage | number: '1.0-2'}} hPa
+        </span>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-grid-tile-header id="wind">
+          Wind
+        </mat-grid-tile-header>
+        <span>
+          {{averageData.windAverage | number: '1.0-2'}} KM/H
+        </span>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</div>
+

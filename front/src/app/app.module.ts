@@ -13,12 +13,16 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ChartComponent } from './chart/chart.component';
 import {NgChartsModule} from "ng2-charts";
 import { HttpClientModule } from '@angular/common/http';
+import { AverageComponent } from './average/average.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     AppComponent,
     FormApiComponent,
-    ChartComponent
+    ChartComponent,
+    AverageComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatButtonToggleModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

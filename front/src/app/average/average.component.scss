@@ -1,0 +1,28 @@
+.container {
+  margin-top: 1.5em;
+}
+
+mat-grid-tile {
+  display: block;
+}
+
+#temp, #press, #wind {
+  font-size: 16px;
+}
+
+#temp {
+  background-color: #4d88da;
+}
+
+#press {
+  background-color: darkolivegreen;
+}
+
+#wind {
+  background-color: lightcoral;
+}
+
+span {
+  margin-top: 30px;
+  font-size: 16px;
+}

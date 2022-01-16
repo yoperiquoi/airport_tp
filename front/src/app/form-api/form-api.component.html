@@ -46,5 +46,6 @@
     <button type="submit" class="btn-submit">Valider</button>
   </form>
   <app-chart *ngIf="type === 'range' && captorRangeData.length > 0" [dataset]="captorRangeData"></app-chart>
+  <app-average *ngIf="type === 'average' && captorAverageData" [averageData]="captorAverageData"></app-average>
 </div>
 
