@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Swagger Sensor
+  description: |
+    This API return data from sensor.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0-oas3
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://virtserver.swaggerhub.com/t0hmi/Sensor/1.0.0
+    description: SwaggerHub API Auto Mocking
+  - url: https://petstore.swagger.io/v2
+tags:
+  - name: Sensor
+    description: Everything about the sensor
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /AverageForDay/{airport_id}/{date}:
+    get:
+      tags:
+        - Sensor
+      summary: Return the average values of all sensor emit today
+      operationId: getvalues
+      parameters:
+        - name: airport_id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: date
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Sensor'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Sensor'
+        '500':
+          description: Server error
+  /GetMesureFromTypeInRange/{airport_id}/{sensor}/{startDate}/{endDate}:
+    get:
+      tags:
+        - Sensor
+      summary: Return the average values of all sensor between two dates
+      operationId: getValuesByDateAndSensor
+      parameters:
+        - name: startDate
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: airport_id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: endDate
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+        - name: sensor
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Sensor'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Sensor'
+        '500':
+          description: Server error
+components:
+  schemas:
+    Sensor:
+      type: object
+      properties:
+        Name:
+          type: string
+        Labels:
+          type: object
+          properties:
+            airport_id:
+              type: string
+            sensor_type:
+              type: string
+            unit:
+              type: string
+        DataPoints:
+          type: array
+          items:
+            type: object
+            properties:
+              Timestamp:
+                type: number
+              Value:
+                type: number
+      xml:
+        name: Sensor
+  requestBodies:
+    Sensor:
+      description: Data return by the db
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Sensor'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Sensor'
+      required: true
