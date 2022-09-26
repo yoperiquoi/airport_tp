@@ -1,4 +1,4 @@
-# Go project : airport sensor
+# Go project : airport sensors
 
 School project for the first year of master diploma of IMT Atlantique.
 Developing an application with go. Working with broker et IoT-simulated devices.
